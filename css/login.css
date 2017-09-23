@@ -1,0 +1,77 @@
+body,
+html,
+p {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background: #fcf8e3;
+}
+.container {
+  margin-top: 150px;
+}
+.container section {
+  width: 70%;
+  border-radius: 10px;
+  min-width: 700px;
+  max-width: 960px;
+  height: 300px;
+  background: #d9edf7;
+  margin: 0 auto;
+}
+.pic {
+  transform: translate(0, -50%);
+  margin-top: 150px;
+  margin-left: 30px;
+  height: 250px;
+  width: 250px;
+  display: inline-block;
+  border: 1px solid #000;
+  border-radius: 4px;
+}
+.logininput {
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #d9534f;
+  float: right;
+  margin-right: 30px;
+  margin-top: 150px;
+  transform: translate(0, -50%);
+}
+.logininput input {
+  width: 200px;
+  height: 30px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 4px;
+  padding-left: 15px;
+}
+.logininput .loginbtn {
+  background: #337ab7;
+  float: right;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 10px;
+  outline: none;
+}
+.logininput .loginbtn:active {
+  background: #2269a6;
+}
+.logininput .returnbtn {
+  background: #d9534f;
+  float: left;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 10px;
+  outline: none;
+  margin-right: 15px;
+}
+.logininput .returnbtn:active {
+  background: #c8424e;
+}
+.logininput .btn {
+  text-align: center;
+}

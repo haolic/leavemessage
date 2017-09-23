@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>留言板</title>
+  <link rel="stylesheet" href="css/index.css">
+  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./js/index.js"></script>
+</head>
+<body>
+  <div class="top_bg"></div>
+  <div class="container">
+    <header>
+      <h1>
+        留　言　板
+      </h1>
+      <p>
+        寄语：<span class="heart">Once you choose your way of life, be brave to stick it out and never teturn.一旦你选择了你的生活方式，就勇敢的坚持下去不回头。</span></p>
+    </header>
+    <section class="talk" id="talk">
+
+      <div class="part">
+        <p><span class="time"></span><br><span class="name"></span></p>
+        <p class="innertext">
+          暂无留言...
+        </p>
+
+      </div>
+    </section>
+    <section class="input_area">
+      <form>
+        <div class="group_title">
+          昵称:<br><input type="text" placeholder="请输入昵称,不超过16字">
+          <select id="face" class="face">
+            <script>
+              var str = "";
+              for(var i = 1; i <= 42; i ++){
+                str += "<option value=" + i + ".jpg>" + i + ".jpg</option>"
+              }
+              $('#face').html(str);
+            </script>
+          </select>
+        </div>
+        <div class="group_detail">
+          留言:<br><textarea placeholder="请输入留言内容,1000字以内"></textarea>
+        </div>
+        <div class="group_button">
+          <input type="button" value="发布" class="success">
+          <input type="reset" value="重新输入" class="reset">
+        </div>
+      </form>
+    </section>
+  </div>
+  <footer>
+    <p>&copy;版权所有: 阿里爸爸项目组</p>
+    <p>联系我们: qq: xxxxxxxxx 微信: xxxxxxx</p>
+    <p>GitHub: <a href="javascript:;">www.github.com/xxxxxxx</a></p>
+  </footer>
+</body>
+</html>
