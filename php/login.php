@@ -7,7 +7,6 @@ include('conn.php');
 $rs = mysql_query("select * from userid where adminName='$name' and pwd='$pwd'");
 $num = mysql_num_rows($rs);
 if($num > 0) {
-	
 	$arr = mysql_fetch_array($rs);
 	echo '{"status": 1, "message": "success","data":[{"name":"'.$arr['adminName'].'", "face":"'.$arr['face'].'"}]}';
 }else{

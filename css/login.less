@@ -6,6 +6,15 @@ body{
   background: #fcf8e3;
 }
 
+.top_bg{
+  position: absolute;
+  top: 0;
+  width:100%;
+  text-align: center;
+  background: #d9534f;
+  color: #fff;
+}
+
 .container{
   margin-top: 150px;
   section{
@@ -21,21 +30,28 @@ body{
 .pic{
   transform: translate(0, -50%);
   margin-top: 150px;
-  margin-left: 30px;
+  margin-left: 50px;
   height: 250px;
   width: 250px;
   display: inline-block;
-  border: 1px solid #000;
-  border-radius: 4px;
+  img{
+    border-radius: 5px;
+  }
 }
 .logininput{
   padding: 15px;
   border-radius: 10px;
   border: 1px solid #d9534f;
   float: right;
-  margin-right: 30px;
+  margin-right: 50px;
   margin-top: 150px;
   transform: translate(0, -50%);
+  .nametips,.pwdtips{
+    font: 12px/1.5em arial,sans-serif;
+    color: #ff7a7a;
+    display: none;
+  }
+
   input{
     width: 200px;
     height: 30px;
@@ -73,4 +89,14 @@ body{
   .btn{
     text-align: center;
   }
+}
+footer{
+  position: absolute;
+  bottom: 0;
+  background: #d9534f;
+  height: 50px;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  padding-top: 30px;
 }

@@ -8,6 +8,21 @@ h1 {
 body {
   background: #d9edf7;
 }
+.gobottom {
+  display: inline-block;
+  position: fixed;
+  background: #ff8686;
+  z-index: 2;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 8px;
+  height: 50px;
+  width: 70px;
+  text-align: center;
+  line-height: 50px;
+  right: 15px;
+  top: 150px;
+}
 header p {
   color: #fff;
   font: 12px/1.5em arial;
@@ -43,15 +58,19 @@ header p .heart {
 }
 .talk .part {
   position: relative;
-  padding: 15px;
+  padding: 30px;
+  padding-bottom: 45px;
   border-radius: 8px;
   margin-bottom: 15px;
   border: 1px solid #337ab7;
   background: #fcf8e3;
 }
+.talk .part img {
+  border-radius: 8px;
+}
 .talk .part .edit {
   float: right;
-  margin-top: -15px;
+  margin-top: 10px;
   margin-left: 15px;
   border: none;
   border-radius: 4px;
@@ -81,6 +100,10 @@ header p .heart {
 }
 .talk .innertext {
   margin-top: 15px;
+  width: 100%;
+  word-break: break-all;
+  color: #333;
+  font: 12px/1.5em '宋体', arial, sans-serif;
 }
 #face {
   margin-left: 15px;
@@ -89,7 +112,15 @@ header p .heart {
   height: 30px;
   border: none;
 }
+#pics {
+  width: 50px;
+  border-radius: 4px;
+  position: relative;
+  left: 15px;
+  top: 12px;
+}
 .input_area {
+  position: relative;
   padding: 15px;
   border: 1px solid #fcf8e3;
   border-radius: 4px;
@@ -97,8 +128,30 @@ header p .heart {
   margin-bottom: 15px;
   font-family: arial sans-serif;
 }
+.input_area .littletips {
+  width: 100px;
+  height: 35px;
+  color: #fff;
+  font: 14px/35px '宋体', arial, sans-serif;
+  background: #cc3366;
+  text-align: center;
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  margin-left: -50px;
+  margin-right: -17px;
+  border-radius: 10px;
+  display: none;
+}
 .input_area .group_title {
   padding: 15px;
+  position: relative;
+}
+.input_area .group_title #nametips {
+  display: none;
+  color: #f66;
+  padding-left: 15px;
+  font-size: 12px;
 }
 .input_area .group_title input {
   width: 250px;
@@ -114,6 +167,12 @@ header p .heart {
 }
 .input_area .group_detail {
   padding: 0 15px 15px;
+}
+.input_area .group_detail #detailtips {
+  display: none;
+  color: #f66;
+  padding-left: 15px;
+  font-size: 12px;
 }
 .input_area .group_detail textarea {
   border: none;
@@ -153,6 +212,9 @@ header p .heart {
 }
 .input_area .group_button input.reset:active {
   background: #b7312d;
+}
+.editbutton {
+  display: none;
 }
 footer {
   background: #337ab7;

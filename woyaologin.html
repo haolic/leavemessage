@@ -10,24 +10,32 @@
   <script src="js/login.js"></script>
 </head>
 <body>
+<div class="top_bg">
+  <h1>管理员登陆</h1>
+</div>
   <div class="container">
+
     <section>
-      <a href="javascript:;" class="pic">我是图片</a>
+      <a href="javascript:;" class="pic"><img src="images/loginlogo.jpg" width="250"></a>
       <div class="logininput">
         <p>
-          管理员:<br>
+          管理员: <span class="nametips">不能为空哦~</span><br>
           <input type="text" placeholder="UserName" id="userName">
         </p>
         <p>
-          密码:<br>
+          密码: <span class="pwdtips">不能为空哦~</span><br>
           <input type="password" placeholder="Password" id="password">
         </p>
         <p class="btn">
-          <button class="returnbtn">返回</button>
+        <a href="index.html"><button class="returnbtn">返回</button></a>
+          
           <button class="loginbtn">登陆</button>
         </p>
       </div>
     </section>
+    <footer>
+     <p>&copy;版权所有: 阿里爸爸项目组</p>
+    </footer>
   </div>
 </body>
 </html>

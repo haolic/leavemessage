@@ -12,7 +12,8 @@ while ($arr = mysql_fetch_array($rs)) {
 	$str .= ',"adminName":"' . $arr['adminName'] . '"';
 	$str .= ',"userFace":"' . $arr['userFace'] . '"';
 	$str .= ',"reply":"' . $arr['reply'] . '"';
-	$str .= ',"porTime":"' . $arr['porTime'] . '"},';
+	$str .= ',"porTime":"' . $arr['porTime'] . '"';
+	$str .= ',"userId":"' . $arr['userId'] . '"},';
 };
 $str = substr($str, 0, strlen($str) - 1);
 
