@@ -243,6 +243,28 @@ header p .heart {
 .editbutton {
   display: none;
 }
+#pagecounter {
+  text-align: center;
+  height: 30px;
+}
+#pagecounter a {
+  display: inline-block;
+  text-decoration: none;
+  color: #333;
+  border: none;
+  padding: 2px 5px;
+  margin: 0px 7px;
+  border-radius: 4px;
+  background: #fcf8e3;
+}
+#pagecounter #_pagenum {
+  height: 25px;
+  position: relative;
+}
+#pagecounter #prevpage,
+#pagecounter #nextpage {
+  display: inline-block;
+}
 footer {
   background: #337ab7;
   color: #fff;

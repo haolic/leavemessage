@@ -1,6 +1,9 @@
 
 //删除留言
 var index;
+var pageindex = 1;
+var pagenum;
+var replyindex;
 function deleteClick(){		
 	index = $(this).parent().parent().data('id');
 	$(this).parent().parent().siblings(".replyarea").animate({"height": "0"});
@@ -20,6 +23,7 @@ function deleteClick(){
 //主留言区显示函数:
 function render(data) {
 	var str = '';
+	pagenum = data.data[0].pagenum;
 	$.each(data.data, function(index, value){
 		str += '<div class="part" data-id='+ value.userId +'>' + 
 			'<p>'+
@@ -34,25 +38,83 @@ function render(data) {
 			+'<p class="editbutton"><button class="edit delete">删除</button><button class="edit reply">回复</button></p>'
 		 + '</div>';
 		$("#talk").html(str);
-	})
+	});
+	if(sessionStorage.getItem('isAdmin')){
+		$(".gobottom").hide();
+		$('.editbutton').css({"display":"block"});
+		$('.input_area').css({"display":"none"});
+		$("header h1").html("留　言　管　理");
+		$("#weladmin").html("欢迎你: " + sessionStorage.getItem('isAdmin'));
+	};
+	//点击删除按钮删除留言.
+	$(".delete").click(deleteClick);
+	//管理员回复部分特效:
+	$("button.reply").click(function () {
+		index = $(this).parent().parent().data('id');
+		if($(this).attr('flag')) {
+			return
+		};
+		$(this).attr('flag',true);
+		$(this).parent().parent().after('<div class="replyarea"><section class="input_area"><form><div class="group_detail">回复:　<span class="replytips">请输入回复内容~~</span><br><textarea placeholder="请输入回复内容" class="replaytext"></textarea></div><div class="group_button"><input type="button" value="发布" class="success"><input type="button" value="取消" class="cancel"><input type="reset" value="重新输入" class="reset"></div></form></section></div>');
+		$(this).parent().parent().next().siblings(".replyarea").animate({"height": "0"}, function(){
+			$(this).prev().find("button.reply").removeAttr("flag");
+		}).end().animate({"height": "380px"});
+		$("input.cancel").click(function(){
+			$(this).parent().parent().parent().parent().animate({"height": "0"},function(){
+				$("button.reply").removeAttr("flag");
+			});
+		});
+
+
+		//管理员回复部分数据交互:
+		$(".success").click(function() {
+			
+			var _adminreply = $(this).parent().parent().parent().parent().prev().find("p.adminreply")
+			$("textarea").focus(function () {
+				$(".replytips").fadeOut(300);
+			})
+			if(!$(this).parent().prev().find("textarea").val()){
+				$(".replytips").fadeIn(300);
+				return;
+			}
+			var _this = $(this).parent().parent().parent().parent();
+			var _replyText = $(this).parent().prev().find("textarea").val().replace(/(\r\n)|(\n)/g,'<br>');
+			$.ajax({
+				url: "php/reply.php",
+				type: "POST",
+				data: {"adminName": sessionStorage.getItem('isAdmin'), "replyText": _replyText, "userId": index},
+				dataType: "json",
+				success: function (data) {
+					if(data.status == 1) {
+						_this.slideUp(200);
+						$("button.reply").removeAttr("flag");
+						_adminreply.html(sessionStorage.getItem("isAdmin") + "回复: <br />" + "<span class='adminreplytext'>" + _replyText + "</span>");
+					}
+				}
+			})
+		});
+	});
 }
 
+
+//页面渲染开始.
 $(function(){
 	$.ajax({
 		url:'php/index.php',
 		type: 'GET',
 		dataType: 'json',
 		success: function(data){
+			pagenum = data.data[0].pagenum;//页数.
+			var _str = "";
+			for(var i = 1; i <= pagenum; i ++) {
+				_str += "<a href='javascript:;' class='pagenum'>" + i + "</a>"
+			}
+			
+			$("#_pagenum").html(_str);
 			render(data);
 		},
 		complete: function(){
-			if(sessionStorage.getItem('isAdmin')){
-				$(".gobottom").hide();
-				$('.editbutton').css({"display":"block"});
-				$('.input_area').css({"display":"none"});
-				$("header h1").html("留　言　管　理");
-				$("#weladmin").html("欢迎你: " + sessionStorage.getItem('isAdmin'));
-			}
+			
 			$("#_name").focus(function(){
 				$('#nametips').fadeOut(200);
 			});
@@ -111,57 +173,37 @@ $(function(){
 			$("#face").change(function(){
 				$("#pics").attr('src', "images/"+ $("#face").val());
 			})
-			//点击删除按钮删除留言.
-			$(".delete").click(deleteClick);
+			
 
-
-			//管理员回复部分特效:
-			$("button.reply").click(function () {
-				index = $(this).parent().parent().data('id');
-				if($(this).attr('flag')) {
-					return
-				};
-				$(this).attr('flag',true);
-				$(this).parent().parent().after('<div class="replyarea"><section class="input_area"><form><div class="group_detail">回复:　<span class="replytips">请输入回复内容~~</span><br><textarea placeholder="请输入回复内容" class="replaytext"></textarea></div><div class="group_button"><input type="button" value="发布" class="success"><input type="button" value="取消" class="cancel"><input type="reset" value="重新输入" class="reset"></div></form></section></div>');
-				$(this).parent().parent().next().siblings(".replyarea").animate({"height": "0"}, function(){
-					$(this).prev().find("button.reply").removeAttr("flag");
-				}).end().animate({"height": "380px"});
-				$("input.cancel").click(function(){
-					$(this).parent().parent().parent().parent().animate({"height": "0"},function(){
-						$("button.reply").removeAttr("flag");
-					});
-				});
-
-
-				//管理员回复部分数据交互:
-				$(".success").click(function() {
-					$("textarea").focus(function () {
-						$(".replytips").fadeOut(300);
-					})
-					if(!$(this).parent().prev().find("textarea").val()){
-						$(".replytips").fadeIn(300);
-						return;
+			//分页
+			function pagebreak(count) {
+				$.ajax({
+					url: 'php/index.php',
+					type: 'GET',
+					dataType: 'json',
+					data: {"pagenum": count},
+					success: function(data) {
+						
+						render(data);
 					}
-					console.log($(this).parent().parent().parent());
-					var _this = $(this).parent().parent().parent().parent();
-					var _replyText = $(this).parent().prev().find("textarea").val().replace(/(\r\n)|(\n)/g,'<br>');
-					$.ajax({
-						url: "php/reply.php",
-						type: "POST",
-						data: {"adminName": sessionStorage.getItem('isAdmin'), "replyText": _replyText, "userId": index},
-						dataType: "json",
-						success: function (data) {
-							if(data.status == 1) {
-								_this.slideUp(200);
-								$("button.reply").removeAttr("flag");
-								location.reload();
-							}
-						}
-					})
-				});
+				})
+			}
+
+				//分页器点击上/下一页.
+			$("#prevpage").click(function() {
+				pageindex --;
+				if (pageindex < 1) {
+					pageindex = 1;
+				}
+				pagebreak(pageindex);
 			})
-
-
+			$("#nextpage").click(function () {
+				pageindex ++;
+				if(pageindex > pagenum) {
+					pageindex = pagenum;
+				}
+				pagebreak(pageindex);
+			})
 		}
 	})
 })
