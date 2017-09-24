@@ -1,4 +1,3 @@
-
 //删除留言
 var index;
 var pageindex = 1;
@@ -7,7 +6,6 @@ var replyindex;
 function deleteClick(){		
 	index = $(this).parent().parent().data('id');
 	$(this).parent().parent().siblings(".replyarea").animate({"height": "0"});
-	
 	$.ajax({
 		url: 'php/delete.php',
 		type: 'GET',
@@ -17,6 +15,18 @@ function deleteClick(){
 			if (data.status == 1) {
 				$(".part[data-id=" + index + "]").slideUp(300);
 			}
+		}
+	})
+}
+//分页
+function pagebreak(count) {
+	$.ajax({
+		url: 'php/index.php',
+		type: 'GET',
+		dataType: 'json',
+		data: {"pagenum": count},
+		success: function(data) {
+			render(data);
 		}
 	})
 }
@@ -64,8 +74,6 @@ function render(data) {
 				$("button.reply").removeAttr("flag");
 			});
 		});
-
-
 		//管理员回复部分数据交互:
 		$(".success").click(function() {
 			
@@ -95,8 +103,6 @@ function render(data) {
 		});
 	});
 }
-
-
 //页面渲染开始.
 $(function(){
 	$.ajax({
@@ -107,21 +113,24 @@ $(function(){
 			pagenum = data.data[0].pagenum;//页数.
 			var _str = "";
 			for(var i = 1; i <= pagenum; i ++) {
-				_str += "<a href='javascript:;' class='pagenum'>" + i + "</a>"
+				_str += "<a href='#top' class='pagenum' data-id=" + i + ">" + i + "</a>"
 			}
-			
 			$("#_pagenum").html(_str);
 			render(data);
+			$("a.pagenum").eq(0).css({"background":"#d9edf7"});
+			$("a.pagenum").click(function(){
+				$(this).css({"background":"#d9edf7"}).siblings().css({"background": "#fcf8e3"})
+				pageindex = $(this).data("id");
+				pagebreak(pageindex);
+			})
 		},
 		complete: function(){
-			
 			$("#_name").focus(function(){
 				$('#nametips').fadeOut(200);
 			});
 			$("#_detail").focus(function(){
 				$('#detailtips').fadeOut(200);
 			})
-
 			//点击发布按钮
 			var sendFlag = false;
 			$("#send").click(function(){
@@ -166,7 +175,6 @@ $(function(){
 							$(".littletips").html("失败").fadeIn(500).fadeOut(500);
 						}
 					}
-					
 				})
 			})
 			//选择头像
@@ -174,27 +182,13 @@ $(function(){
 				$("#pics").attr('src', "images/"+ $("#face").val());
 			})
 			
-
-			//分页
-			function pagebreak(count) {
-				$.ajax({
-					url: 'php/index.php',
-					type: 'GET',
-					dataType: 'json',
-					data: {"pagenum": count},
-					success: function(data) {
-						
-						render(data);
-					}
-				})
-			}
-
-				//分页器点击上/下一页.
+			//分页器点击上/下一页.
 			$("#prevpage").click(function() {
 				pageindex --;
 				if (pageindex < 1) {
 					pageindex = 1;
 				}
+				$("a.pagenum").css({"background": "#fcf8e3"}).eq(pageindex-1).css({"background":"#d9edf7"});
 				pagebreak(pageindex);
 			})
 			$("#nextpage").click(function () {
@@ -202,6 +196,7 @@ $(function(){
 				if(pageindex > pagenum) {
 					pageindex = pagenum;
 				}
+				$("a.pagenum").css({"background": "#fcf8e3"}).eq(pageindex-1).css({"background":"#d9edf7"});
 				pagebreak(pageindex);
 			})
 		}
