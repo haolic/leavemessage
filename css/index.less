@@ -33,6 +33,15 @@ header{
       color: #d9edf7;
     }
   }
+  
+}
+.replyarea{
+  height: 0;
+  overflow: hidden;
+}
+#weladmin{
+  color: #f90;
+  font-size: 18px;
 }
 .top_bg{
   background: #337ab7;
@@ -111,6 +120,23 @@ header{
   }
 }
 
+//回复不能为空的提示
+.replytips{
+  color: #f00;
+  font: 12px/1.5em arial;
+  display: none;
+}
+
+//管理员回复内容
+.adminreply{
+  margin-top: 15px;
+  .adminreplytext{
+    color: #333;
+    font: 12px/1.5em arial;
+  }
+}
+
+//头像
 #face{
   margin-left: 15px;
   width: 100px;
@@ -215,6 +241,13 @@ header{
       margin-left: 15px;
       &:active{
         background: #b7312d;
+      }
+    }
+    input.cancel{
+      background: #f90;
+      margin-left: 15px;
+      &:active{
+        background: #e80;
       }
     }
   }

@@ -32,6 +32,14 @@ header p .heart {
   font-style: italic;
   color: #d9edf7;
 }
+.replyarea {
+  height: 0;
+  overflow: hidden;
+}
+#weladmin {
+  color: #f90;
+  font-size: 18px;
+}
 .top_bg {
   background: #337ab7;
   height: 140px;
@@ -104,6 +112,18 @@ header p .heart {
   word-break: break-all;
   color: #333;
   font: 12px/1.5em '宋体', arial, sans-serif;
+}
+.replytips {
+  color: #f00;
+  font: 12px/1.5em arial;
+  display: none;
+}
+.adminreply {
+  margin-top: 15px;
+}
+.adminreply .adminreplytext {
+  color: #333;
+  font: 12px/1.5em arial;
 }
 #face {
   margin-left: 15px;
@@ -212,6 +232,13 @@ header p .heart {
 }
 .input_area .group_button input.reset:active {
   background: #b7312d;
+}
+.input_area .group_button input.cancel {
+  background: #f90;
+  margin-left: 15px;
+}
+.input_area .group_button input.cancel:active {
+  background: #e80;
 }
 .editbutton {
   display: none;

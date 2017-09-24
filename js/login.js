@@ -25,7 +25,9 @@ $(function(){
 			success:function(data) {
 
 				if (data.status == 1) {
-					sessionStorage.setItem('isAdmin','admin');
+
+					//利用sessionStorage判断是否是管理员登陆.
+					sessionStorage.setItem('isAdmin',$("#userName").val());
 					location.href="index.html";
 				} else {
 					alert(data.message);
