@@ -23,6 +23,21 @@ body {
   right: 15px;
   top: 150px;
 }
+.indexlogin {
+  display: inline-block;
+  position: fixed;
+  background: #337ab7;
+  z-index: 3;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 8px;
+  height: 50px;
+  width: 100px;
+  text-align: center;
+  line-height: 50px;
+  right: 15px;
+  top: 220px;
+}
 header p {
   color: #fff;
   font: 12px/1.5em arial;
@@ -264,6 +279,28 @@ header p .heart {
 #pagecounter #prevpage,
 #pagecounter #nextpage {
   display: inline-block;
+}
+#pagecounter .inputpagenum {
+  height: 30px;
+  width: 30px;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  padding-left: 3px;
+  outline-color: #f90;
+}
+#pagecounter .jumpbutton {
+  border: none;
+  border-radius: 4px;
+  background: #fcf8e3;
+  outline: none;
+}
+#pagecounter .jumpbutton:active {
+  background: #ebe7d2;
+}
+#pagecounter .jumptips {
+  color: #f00;
+  font: 12px/1.5em arial;
 }
 footer {
   background: #337ab7;
